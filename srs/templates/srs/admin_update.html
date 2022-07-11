@@ -1,0 +1,29 @@
+{% extends "srs/base.html"%}
+{% block content %}
+{% load crispy_forms_tags %}
+{%if request.user.is_authenticated %}
+<br><br>
+<div class="container  p-3">
+<div class="row">
+    <div class="col-md-6  contain">
+        <div class="">
+            <h1 class="">Update Report </h1>
+            <form method="POST" action="{%url 'admin_update' issue.pk%}">
+              {% csrf_token %}
+              {%if request.user.is_admin %}
+              <div class="form-check"><p class="p-1">{{form.Issue_Complete | as_crispy_field}}</p> </div>
+              <div class="form-check"><p class="p-1">{{form.Issue_Approve | as_crispy_field}}</p></div>
+              <div class="form-check"> <p class="p-1">{{form.Issue_Progress | as_crispy_field}}</p></div>
+              <div class="form-check"> <p class="p-1">{{form.Issue_Solution_Summary | as_crispy_field}}</p></div>
+              {%else%}
+              {%endif%}
+              <input class="m-3 btn btn-outline-success  btn-lg" type="Submit" vlaue= "Submit" name="Submit" id="">
+          </form>
+          </div>
+        </div>
+</div>
+  </div>
+  {%else%}
+  <td><a class="btn btn-outline-danger text-center" href="{% url 'login'%}"> Login </a></td>
+  {%endif%}
+{% endblock content %}

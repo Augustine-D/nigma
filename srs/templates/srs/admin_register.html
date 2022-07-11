@@ -1,0 +1,23 @@
+{% extends "srs/base.html"%}
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="container">
+  <br><br><br><br><br>
+
+<div class="row">
+    <div class="col-md-6 contain m-2">
+        <div class="pl-5">
+            <h1>Register Here</h1>
+            <form method="POST" action="{%url 'admin_register'%}">
+              {% csrf_token %}
+              <span class="">{{form|crispy}}</span> 
+              <input class="m-3 btn btn-outline-success  btn-lg" type="Submit"
+              vlaue= "Submit" name="Submit" id="">
+
+              <p>Already have an account?<a href="{%url 'login'%}"> Login</a></p> 
+          </form>
+          </div>
+        </div>
+</div>
+  </div>
+{% endblock content %}

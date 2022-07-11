@@ -1,0 +1,38 @@
+{% extends "srs/base.html"%}
+{% block content %}
+{% load crispy_forms_tags %}
+{%if request.user.is_authenticated %}
+<br><br>
+<div class="container">
+<div class="row">
+    <div class="col-md-6 contain">
+        <div class="">
+            <h1 class=" p-2"> Send Report </h1>
+            <form method="POST" action="{%url 'create'%}">
+              {% csrf_token %}
+
+              <div class="form-check">
+              <p class="p-1"> {{form.Issue_Title | as_crispy_field}}
+              </div>
+
+                <div class="form-check">
+                <p class="p-1"> {{form.Issue_Priority | as_crispy_field}}</p> 
+              </div>
+
+              <div class="form-check">
+                 <p class="p-1"> {{form.Issue_Description | as_crispy_field}}</p>
+                </div>
+                      
+                <div class="form-check">
+              <input class="m-3 btn btn-outline-success  btn-lg" type="Submit" 
+              vlaue= "Submit" name="Submit" id="">
+            </div>
+          </form>
+          </div>
+        </div>
+</div>
+  </div>
+  {%else%}
+  <td><a class="btn btn-outline-danger text-center" href="{% url 'login'%}"> Login </a></td>
+  {%endif%}
+{% endblock content %}

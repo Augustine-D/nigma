@@ -1,0 +1,52 @@
+{% extends "srs/base.html"%}
+{% block content %}
+{% load crispy_forms_tags %}
+{%if request.user.is_authenticated %}
+<br><br><br>
+<div class="container">
+<div class="row">
+    <div class="col-md-12 contain ">
+        <div class="container">
+            <div class=" p-2">
+              <h1>Details of Case # {{issue.pk}} </h1>
+              <p> Title <br>{{issue.Issue_Title}}</p> 
+              <p>Approved<br> {%if issue.Issue_Approve%} 
+                <p><i class="bi bi-bookmark-check btn-success"></i></p>
+                {%else%}
+                <p><i class="bi bi-bookmark-x-fill btn-danger"></i></p>
+                {%endif%}</p> 
+              <p>Priority <br> {{issue.Issue_Priority}} </p>
+              <p>Progress <br> {{issue.Issue_Progress}} </p>
+              <p> Complete <br>  {%if issue.Issue_Complete%} 
+                <p><i class="bi bi-bookmark-check btn-success"></i></p>
+                {%else%}
+                <p><i class="bi bi-bookmark-x-fill btn-danger"></i></p>
+                {%endif%} </p>
+              <p>Created <br> {{issue.Issue_Created_On}} </p>
+              <p>Description <br> {{issue.Issue_Description}} </p>
+              <p>Summary: <br> {{issue.Issue_Solution_Summary}} </p>
+
+              {%if request.user.is_customer %}
+              <p><a class="btn btn-success" href="{% url 'update' issue.pk %}">  <i class="bi bi-pen"></i> </a></p>
+              {%else%}
+              {%endif%}
+
+              {%if request.user.is_employee %}
+              <p><a class="btn btn-success" href="{% url 'emp_pdate' issue.pk %}">  <i class="bi bi-pen"></i> </a></p>
+              {%else%}
+              {%endif%}
+
+              {%if request.user.is_admin %}
+              <p><a class="btn btn-success" href="{% url 'admin_update' issue.pk %}">  <i class="bi bi-pen"></i> </a></p>
+              <p><a class="btn btn-danger" href="{% url 'delete' issue.pk %}"> <i class="bi bi-archive"></i> </a></p>
+              {%else%}
+              {%endif%}
+            </div>
+          </div>
+        </div>
+</div>
+  </div>
+  {%else%}
+  <td><a class="btn btn-outline-danger text-center" href="{% url 'login'%}"> Login </a></td>
+  {%endif%}
+{% endblock content %}

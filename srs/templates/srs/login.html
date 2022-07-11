@@ -1,0 +1,29 @@
+
+
+{% extends "srs/base.html"%}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="mt-5 pt-5">
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 contain p-5">
+            <div class="">
+                <h3>Provide details to login</h3>
+                <form method="POST" action="{%url 'login'%}">
+                    {% csrf_token %}
+                    <span class=""> {{form|crispy}}</span>
+
+                    <input class="mt-3 mb-5 btn-lg btn-success " type="Submit" 
+                    vlaue= "Submit" name="Submit" id=""> 
+                  <p class="text-center">Don't have an account? <br>
+                    <a class=" m-3" href="{%url 'admin_register'%}"> Admin</a> 
+                        <a class=" m-3" href="{%url 'employee_register'%}"> Staff </a> 
+                        <a class=" m-3" href="{%url 'customer_register'%}"> User</a></p> 
+                </form>
+              </div>
+            </div>
+    </div>
+      </div>
+      {% endblock content %}
